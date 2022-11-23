@@ -1,0 +1,82 @@
+import math
+
+# a) funcion para leer datos en una lista
+def llenarLista(numero_datos):
+    lista = []
+    for i in range(0, numero_datos):
+        numero = int(input("Ingresa el "+str(i+1)+"º elemento a la lista: "))
+        lista.append(numero)
+
+    return lista #retornamos la lista con los datos ingresados.
+
+# b) funcion para ordenar lista algoritmo de la burbuja
+def ordenarLista(lista):
+    for i in range(0, len(lista)):
+        for j in range(0, len(lista) - 1):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+    return lista
+
+# c) funcion para calcular sumatoria de los datos de la lista
+def sumatoriaLista(lista):
+    sumatoria = 0
+    for dato in lista:
+        sumatoria += dato
+    return sumatoria
+
+# d) Calcular la media de los datos
+def media(lista):
+    return sumatoriaLista(lista) / len(lista)
+
+# e) Calcular mediana
+def mediana(lista):
+    lista = ordenarLista(lista)
+    largo = len(lista)
+    index = largo/2
+    if largo%2==0:
+        return (lista[int(index-1)]+lista[int(index)])/2     
+    else:
+        index = round(index)
+        return lista[index]
+
+# f) Calcular moda
+def moda(lista):
+    numeroRepeticiones = []
+
+    for numero in lista:
+        count = lista.count(numero)
+        numeroRepeticiones.append(count)
+
+    index = numeroRepeticiones.index(max(numeroRepeticiones))
+
+    if max(numeroRepeticiones)==1:
+        return "No existe"
+    else:
+        return lista[index]
+
+# g) desviacion estandar
+def desviacion(lista):
+    desviacion = 0
+    media_lista = media(lista)
+    numero_datos = len(lista)
+
+    for numero in lista:
+        desviacion += pow((numero - media_lista), 2) / numero_datos
+
+    desviacion = math.sqrt(desviacion)
+    return desviacion
+
+
+# ejecucion del programa
+
+numero_datos = int(input("Cuantos datos quieres ingresar: "))
+
+lista = llenarLista(numero_datos) # llenamos la lista
+
+print("Los datos son:", lista)
+print("Los ordenados:", ordenarLista(lista))
+print("La sumatoria es:", sumatoriaLista(lista))
+print("La media es:", media(lista))
+print("La mediana es:", mediana(lista))
+print("La moda es:", moda(lista))
+print("La desviacion es:", desviacion(lista))
