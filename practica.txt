@@ -1,0 +1,32 @@
+# Ejemplo de la practica
+#programa que lee la cantidad y precio de un producto
+#luego calcula el total de la venta según los datos
+#del archivo de texto
+
+cantidad = int(input("Cantidad de Producto: "))
+precio = float(input("Ingresa el precio: "))
+
+file = open("sales.txt", "a")
+file.write("Cantidad: {0}\n".format(cantidad))
+file.write("Precio: {0}\n".format(precio))
+file.close()
+
+ventas = open("sales.txt", "r")
+totalVeta = 0
+
+precio = 0
+cantidad = 0
+
+for venta in ventas:
+    if venta.startswith("Precio"):
+        precio = float(venta[7:])
+
+    if venta.startswith("Cantidad"):
+        cantidad = float(venta[9:])
+
+    if cantidad != 0 and precio != 0:
+        totalVeta += (precio * cantidad)
+        precio = 0
+        cantidad = 0
+
+print("Resumen de todas mis ventas ${0}".format(totalVeta))
